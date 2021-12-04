@@ -1,24 +1,32 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useEffect } from 'react';
+import { BrowserRouter } from 'react-router-dom'
+import { useDispatch } from "react-redux";
+
+import { useAuth } from './hooks/auth.hook.js'
+import { useRoutes } from './routes';
+import { setAuth } from './redux/action/auth.js';
+
+import './app.css';
+import 'materialize-css'
+import Navbar from './components/Navbar.js';
+
 
 function App() {
+  const { login, logout, userId } = useAuth()
+  const isAuth = !!userId
+  const router = useRoutes(isAuth)
+
+  const dispatch = useDispatch(); 
+
+  useEffect(() => {
+    dispatch(setAuth({ login, logout, userId }))
+  }, [])
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <BrowserRouter>
+      {isAuth && <Navbar />}
+      {router}
+    </BrowserRouter>
   );
 }
 

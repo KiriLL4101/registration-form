@@ -1,0 +1,24 @@
+{
+  "users": [
+    {
+      "id": 1,
+      "email": "fedechkin-kiril@mail.ru",
+      "password": "123456789"
+    },
+    {
+      "id": 2,
+      "email": "kiril@mail.ru",
+      "password": "345"
+    },
+    {
+      "id": 3,
+      "email": "lol@mail.ru",
+      "password": "1488"
+    },
+    {
+      "email": "fedechkin-kiril@yandex.ru",
+      "password": "sdasdaT",
+      "id": 4
+    }
+  ]
+}
