@@ -20,6 +20,7 @@ server.post('/register', (req, res, next) => {
             message: 'Такой email уже зарегистрирован'
         })
     }
+
     res.status(201).json({
         message: 'Пользователь создан'
     })
@@ -27,7 +28,6 @@ server.post('/register', (req, res, next) => {
 })
 
 server.post('/login', (req, res, next) => {
-    console.log(2, req.body)
     if (req &&
         req.body &&
         db.users.filter(user => user.email === req.body.email)[0]?.password !== req.body?.password) {
