@@ -11,12 +11,11 @@ function Navbar() {
     return (
         <nav className="blue">
             <div className="nav-wrapper">
-                <a href="#" className="brand-logo">Something Logo</a>
+                <Link to="/" className="brand-logo">Something Logo</Link>
                 <ul id="nav-mobile" className="right hide-on-med-and-down">
-                    <li><a href="#">Home</a></li>
-                    <li><a href="#">About</a></li>
-                    <li><Link to="/setting" >Setting</Link></li>
-                    <li><Link to="/" onClick={logout}>Logout</Link></li>
+                    <li><Link to="/">Главная</Link></li>
+                    <li><Link to="/setting" >Настройки</Link></li>
+                    <li><Link to="/" onClick={logout}>Выход</Link></li>
                 </ul>
             </div>
         </nav>

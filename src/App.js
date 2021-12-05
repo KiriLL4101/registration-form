@@ -5,10 +5,10 @@ import { useDispatch } from "react-redux";
 import { useAuth } from './hooks/auth.hook.js'
 import { useRoutes } from './routes';
 import { setAuth } from './redux/action/auth.js';
+import Navbar from './components/Navbar.js';
 
 import './app.css';
 import 'materialize-css'
-import Navbar from './components/Navbar.js';
 
 
 function App() {

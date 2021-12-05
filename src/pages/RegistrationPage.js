@@ -7,7 +7,7 @@ import { useMessage } from '../hooks/message.hook'
 function RegistrationPage() {
     const message = useMessage()
     const { loading, request, error, clearError } = useHttp()
-    const [form, setFrom] = React.useState({
+    const [form, setForm] = React.useState({
         email: '', password: '', repeatPassword: ''
     })
 
@@ -19,7 +19,7 @@ function RegistrationPage() {
     }, [error, message, clearError])
 
     const changeHandler = event => {
-        setFrom({...form, [event.target.name]: event.target.value})
+        setForm({...form, [event.target.name]: event.target.value})
     }
 
     const registerHandler = async () => {
@@ -45,7 +45,15 @@ function RegistrationPage() {
 
 
         try {
-            const data = await request('/register', 'POST', { email: form.email, password: form.password })
+            const data = await request(`/users?email=${form.email}`, 'GET')
+            
+            if(data && data[0]){
+                console.log(data)
+                message("Такой email уже зарегистрирован")
+                return
+            }
+
+            await request(`/users`, 'POST', { email: form.email, password: form.password })
             navigate('/')
         } catch (error) {}
     }
@@ -64,15 +72,15 @@ function RegistrationPage() {
                         </div>
                         <div className="input-field">
                             <input id="password" type="text" name="password" onChange={changeHandler}/>
-                            <label htmlFor="password">Password</label>
+                            <label htmlFor="password">Пароль</label>
                         </div>
                         <div className="input-field">
                             <input id="repeat-password" type="text" name="repeatPassword" onChange={changeHandler}/>
-                            <label htmlFor="repeat-password">Repeat Password</label>
+                            <label htmlFor="repeat-password">Повторите пароль</label>
                         </div>
                     </div>
                     <div className="card-action">
-                        <Link to="/" className="btn blue darken-1" style={{ marginRight: 15}}>Назад</Link>
+                        <Link to="/" className="btn blue darken-1" style={{ marginRight: 15}} disabled={loading}>Назад</Link>
                         <button to="/" className="btn blue darken-1" onClick={registerHandler} disabled={loading}>Регистрация</button>
                     </div>
                 </div>

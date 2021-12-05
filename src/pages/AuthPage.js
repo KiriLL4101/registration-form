@@ -9,15 +9,13 @@ import { setUser } from '../redux/action/auth'
 function AuthPage() {
     const message = useMessage()
     const { loading, request, error, clearError } = useHttp()
-    // const [form, setFrom] = useState({
-    //     email: '', password: ''
-    // })
+    const [ form, setFrom ] = useState({
+        email: '', password: ''
+    })
     let dispatch = useDispatch(); 
-    const { login, email, password } = useSelector(({ params, user}) => {
+    const { login } = useSelector(({ params }) => {
         return {
-            login: params.login,
-            email: user.email,
-            password: user.password
+            login: params.login
         }
     })
 
@@ -27,30 +25,37 @@ function AuthPage() {
     }, [error, message, clearError])
 
     const changeHandler = event => {
-        // setFrom({...form, [event.target.name]: event.target.value})
-        dispatch(setUser({email, password, [event.target.name]: event.target.value}))
+        setFrom({...form, [event.target.name]: event.target.value})
     }
 
     const loginHandler = async () => {
-        if(!email || !password){
+        if(!form.email || !form.password){
             message('Заполните поля')
             return
         }
-        if(!email.includes('@')){
+        if(!form.email.includes('@')){
             message('Не корректный email')
             return
         }
 
-        if(password.length <= 4 || password.length >=  15 || !password.match(/[A-Z]/)){
+        if(form.password.length <= 4 || form.password.length >=  15 || !form.password.match(/[A-Z]/)){
             message('Длинна пароля должна быть больше 4 и иметь хотя бы 1 заглавную букву ')
             return
         }
 
 
         try {
-            const data = await request('/users', 'POST', {email, password})
-            dispatch(setUser({...data, userId: data.id}))
-            login(data.id)
+            const data = await request(`/users?email=${form.email}`, 'GET')
+            if(data && data[0] && data[0].password === form.password){
+                console.log(data)
+                dispatch(setUser({...data[0], userId: data[0].id}))
+                login(data[0].id)
+                return
+            }
+           setFrom({
+                email: '', password: ''
+            })
+            message('Неверный пароль')
         } catch (e) {
              // window.location.href = 'http://stackoverflow.com/search?q=[js]' + e.message
         }
@@ -66,17 +71,17 @@ function AuthPage() {
                             Авторизация
                         </h2>
                         <div className="input-field">
-                            <input id="email" type="email" name="email" onChange={changeHandler} value={email} />
+                            <input id="email" type="email" name="email" onChange={changeHandler} value={form.email} />
                             <label htmlFor="email">Email</label>
                         </div>
                         <div className="input-field">
-                            <input id="password" type="password" name="password" onChange={changeHandler} value={password}/>
-                            <label htmlFor="password">Password</label>
+                            <input id="password" type="password" name="password" onChange={changeHandler} value={form.password}/>
+                            <label htmlFor="password">Пароль</label>
                         </div>
                     </div>
                     <div className="card-action">
                         <button className="btn blue darken-1" style={{ marginRight: 15}} onClick={loginHandler} disabled={loading}>Войти</button>
-                        <Link to="/registration" className="btn blue darken-1">Регистрация</Link>
+                        <Link to="/registration" className="btn blue darken-1" disabled={loading}>Регистрация</Link>
                     </div>
                 </div>
             </div>
