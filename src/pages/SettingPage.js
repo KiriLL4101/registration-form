@@ -76,7 +76,7 @@ function SettingPage() {
                     </div>
                     <div className="card-action">
                         <Link to="/" className="btn blue darken-1" style={{ marginRight: 15}} disabled={loading} >Назад</Link>
-                        <button className="btn blue darken-1" onClick={changePasswordHandler} className="btn blue darken-1" disabled={loading}>Сменить</button>
+                        <button onClick={changePasswordHandler} className="btn blue darken-1" disabled={loading}>Сменить</button>
                     </div>
                 </div>
             </div>
