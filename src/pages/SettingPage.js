@@ -62,15 +62,15 @@ function SettingPage() {
                             Смена пароля
                         </h2>
                         <div className="input-field">
-                            <input id="oldPassword" type="text" name="oldPassword" onChange={changeHandler}/>
+                            <input id="oldPassword" type="password" name="oldPassword" onChange={changeHandler}/>
                             <label htmlFor="oldPassword">Старый пароль</label>
                         </div>
                         <div className="input-field">
-                            <input id="password" type="text" name="password" onChange={changeHandler} />
+                            <input id="password" type="password" name="password" onChange={changeHandler} />
                             <label htmlFor="password">Пароль</label>
                         </div>
                         <div className="input-field">
-                            <input id="repeatPassword" type="text" name="repeatPassword" onChange={changeHandler} />
+                            <input id="repeatPassword" type="password" name="repeatPassword" onChange={changeHandler} />
                             <label htmlFor="repeatPassword">Повторите пароль</label>
                         </div>
                     </div>
