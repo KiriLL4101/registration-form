@@ -75,7 +75,7 @@ function AuthPage() {
                             <label htmlFor="email">Email</label>
                         </div>
                         <div className="input-field">
-                            <input id="password" type="password" name="password" onChange={changeHandler} value={form.password}/>
+                            <input id="password" type="password" name="password" minlength="4" mixlength="15" pattern="/[A-Z]/" onChange={changeHandler} value={form.password}/>
                             <label htmlFor="password">Пароль</label>
                         </div>
                     </div>

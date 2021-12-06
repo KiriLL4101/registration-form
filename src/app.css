@@ -3,3 +3,34 @@
 body {
   background-color: #b2ebf2;
 }
+
+input[type=email]:-internal-autofill-previewed,
+input[type=email]:-internal-autofill-selected,
+input[type=email]:not(.browser-default):focus:not([readonly]),
+input[type=email]:-webkit-autofill {
+  -webkit-background-clip: text;
+}
+
+
+input,
+input:focus,
+input:focus{
+  border-bottom: 1px solid #e3f2fd !important;
+  box-shadow: 0 1px 0 0 #e3f2fd !important;
+}
+
+input + label{
+  color: #e3f2fd !important;
+}
+
+input:focus + label{
+  color: #e3f2fd !important;
+}
+
+input + label{
+  color: #e3f2fd !important;
+}
+
+input#email:focus + label{
+  color: #e3f2fd !important;
+}

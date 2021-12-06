@@ -71,11 +71,11 @@ function RegistrationPage() {
                             <label htmlFor="email">Email</label>
                         </div>
                         <div className="input-field">
-                            <input id="password" type="password" name="password" onChange={changeHandler}/>
+                            <input id="password" type="password" name="password" minlength="4" mixlength="15" onChange={changeHandler}/>
                             <label htmlFor="password">Пароль</label>
                         </div>
                         <div className="input-field">
-                            <input id="repeat-password" type="password" name="repeatPassword" onChange={changeHandler}/>
+                            <input id="repeat-password" type="password" name="repeatPassword" minlength="4" mixlength="15" onChange={changeHandler}/>
                             <label htmlFor="repeat-password">Повторите пароль</label>
                         </div>
                     </div>
